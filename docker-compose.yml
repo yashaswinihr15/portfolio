@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  jenkins:
+    build: ./jenkins          # Build the custom Jenkins image (with Docker CLI + Git)
+    container_name: jenkins
+    restart: unless-stopped
+    ports:
+      - "8090:8080"           # Jenkins UI  → open http://localhost:8090
+      - "50000:50000"         # Jenkins agent port
+    volumes:
+      - jenkins_home:/var/jenkins_home          # Jenkins data (jobs, plugins, builds)
+      - /var/run/docker.sock:/var/run/docker.sock  # Let Jenkins use Docker on the host
+      - .:/workspace/portfolio                  # Mount portfolio folder into Jenkins
+    user: root                # Run as root so Docker socket works without issues
+
+volumes:
+  jenkins_home:
