@@ -5,7 +5,7 @@ pipeline {
         IMAGE_NAME     = 'portfolio'
         CONTAINER_NAME = 'portfolio-container'
         HOST_PORT      = '8080'
-        GITHUB_USER    = 'YOUR_GITHUB_USERNAME'   // ← change this
+        GITHUB_USER    = 'yashaswinihr15'         // ← your GitHub username
         GITHUB_REPO    = 'portfolio'               // ← your repo name
         GITHUB_BRANCH  = 'main'
     }

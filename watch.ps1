@@ -8,8 +8,8 @@
 # ─── CONFIGURE THESE ──────────────────────────────────────────────
 $JENKINS_URL   = "http://localhost:8090"
 $JOB_NAME      = "portfolio-pipeline"
-$JENKINS_USER  = "admin"
-$JENKINS_TOKEN = "YOUR_API_TOKEN"   # Get from: Jenkins → admin → Configure → API Token
+$JENKINS_USER  = "yashaswinihr15"
+$JENKINS_TOKEN = "112cf766ed739e771d8087cbf087774f57"   # Get from: Jenkins → admin → Configure → API Token
 # ──────────────────────────────────────────────────────────────────
 
 $WatchPath    = $PSScriptRoot      # Watches the same folder as this script
