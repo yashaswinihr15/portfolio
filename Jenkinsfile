@@ -92,7 +92,7 @@ pipeline {
 
                                 {
                                     \\"name\\":\\"Live Website\\",
-                                    \\"value\\":\\"http://localhost:30080\\"
+                                    \\"value\\":\\"http://localhost:8080\\"
                                 },
 
                                 {
