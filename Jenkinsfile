@@ -13,7 +13,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 echo '📦 Building Docker image...'
-                sh 'docker build --no-cache -t ${IMAGE_NAME}:latest /workspace/portfolio'
+                sh 'docker build --no-cache -t portfolio:${BUILD_NUMBER} -t portfolio:latest /workspace/portfolio'
             }
         }
 
@@ -23,7 +23,7 @@ pipeline {
                 sh '''
                     cd /workspace/portfolio
                     kubectl apply -f k8s/
-                    kubectl rollout restart deployment/portfolio-deployment
+                    kubectl set image deployment/portfolio-deployment portfolio=portfolio:${BUILD_NUMBER}
                 '''
             }
         }
