@@ -21,16 +21,8 @@ pipeline {
 
         stage('Stop Old Container') {
             steps {
-                echo '🛑 Stopping old container if running...'
-                sh '''
-                    if docker ps -q --filter "name=${CONTAINER_NAME}" | grep -q .; then
-                        docker stop ${CONTAINER_NAME}
-                        docker rm   ${CONTAINER_NAME}
-                        echo "Old container removed."
-                    else
-                        echo "No old container found. Skipping."
-                    fi
-                '''
+                echo '🛑 Removing old container if it exists...'
+                sh 'docker rm -f ${CONTAINER_NAME} || true'
             }
         }
 
