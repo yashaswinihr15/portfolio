@@ -67,9 +67,58 @@ pipeline {
     post {
         success {
             echo '🎉 All done! Website deployed + GitHub updated.'
+            catchError(buildResult: 'SUCCESS', stageResult: 'SUCCESS') {
+                withCredentials([string(credentialsId: 'discord-webhook', variable: 'DISCORD_WEBHOOK')]) {
+                    sh '''
+                        # Grab the latest commit message to show in the notification
+                        COMMIT_MSG=$(git log -1 --pretty=%B | tr -d '\n' | tr -d '"')
+                        
+                        curl -H "Content-Type: application/json" \
+                        -X POST \
+                        -d "{
+                            \"embeds\": [{
+                                \"title\": \"🟢 Build Success - ${JOB_NAME} (#${BUILD_NUMBER})\",
+                                \"description\": \"Website successfully deployed to production! ✅\\nLatest changes pushed to GitHub. 📤\",
+                                \"url\": \"${BUILD_URL}\",
+                                \"color\": 3066993,
+                                \"fields\": [
+                                    {
+                                        \"name\": \"Latest Commit\",
+                                        \"value\": \"${COMMIT_MSG}\",
+                                        \"inline\": false
+                                    },
+                                    {
+                                        \"name\": \"Deployment Status\",
+                                        \"value\": \"[Go to Live Website](http://localhost:8080)\",
+                                        \"inline\": true
+                                    }
+                                ]
+                            }]
+                        }" \
+                        $DISCORD_WEBHOOK
+                    '''
+                }
+            }
         }
         failure {
             echo '❌ Build failed. Open Console Output for details.'
+            catchError(buildResult: 'FAILURE', stageResult: 'SUCCESS') {
+                withCredentials([string(credentialsId: 'discord-webhook', variable: 'DISCORD_WEBHOOK')]) {
+                    sh '''
+                        curl -H "Content-Type: application/json" \
+                        -X POST \
+                        -d "{
+                            \"embeds\": [{
+                                \"title\": \"🔴 Build Failed - ${JOB_NAME} (#${BUILD_NUMBER})\",
+                                \"description\": \"The deployment pipeline failed! ❌\\nPlease check the logs to diagnose the issue.\",
+                                \"url\": \"${BUILD_URL}console\",
+                                \"color\": 15158332
+                            }]
+                        }" \
+                        $DISCORD_WEBHOOK
+                    '''
+                }
+            }
         }
     }
 }
