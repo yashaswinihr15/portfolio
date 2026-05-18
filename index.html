@@ -5,14 +5,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
+  
+  <!-- Background Animation -->
+  <div class="bg-grid"></div>
 
   <!-- Navigation -->
-  <nav id="navbar">
-    <div class="logo">MyPortfolio</div>
+  <nav id="navbar" class="glass-nav">
+    <div class="logo">&lt;MyPortfolio/&gt;</div>
     <ul class="nav-links">
       <li><a href="#home">Home</a></li>
       <li><a href="#about">About</a></li>
@@ -25,13 +29,23 @@
 
   <!-- Home Section -->
   <section id="home" class="section home-section">
-    <div class="home-content">
-      <h1>Hi, I'm <span class="highlight">Yashaswini Ramesh </span></h1>
-      <h1>Yashaswini Portfolio 🚀 Kubernetes</h1>
-      <p class="tagline">Computer Science Student &amp; Aspiring DevOps Engineer</p>
-      <p class="home-desc">I love building things and automating deployments.</p>
-      <a href="#projects" class="btn">View My Work</a>
+    <div class="terminal-container">
+      <div class="terminal-header">
+        <span class="dot close"></span>
+        <span class="dot minimize"></span>
+        <span class="dot maximize"></span>
+        <div class="terminal-title">bash - yashaswini@devops: ~</div>
+      </div>
+      <div class="terminal-body">
+        <p class="cmd-line"><span class="prompt">yashaswini@devops:~$</span> whoami</p>
+        <h1>Hi, I'm <span class="highlight">Yashaswini Ramesh</span></h1>
+        <p class="cmd-line"><span class="prompt">yashaswini@devops:~$</span> cat description.txt</p>
+        <h2 class="subtitle">Aspiring DevOps Engineer 🚀</h2>
+        <p class="home-desc">Computer Science Student passionate about building things, automating deployments, and scaling systems.</p>
+        <p class="cmd-line"><span class="prompt">yashaswini@devops:~$</span> <span class="typing-text"></span><span class="cursor">_</span></p>
+      </div>
     </div>
+    <a href="#projects" class="btn glow-btn">Execute deployment.yaml</a>
   </section>
 
   <!-- About Section -->
