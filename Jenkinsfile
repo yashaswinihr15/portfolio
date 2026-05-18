@@ -23,6 +23,7 @@ pipeline {
                 sh '''
                     cd /workspace/portfolio
                     kubectl apply -f k8s/
+                    kubectl rollout restart deployment/portfolio-deployment
                 '''
             }
         }
@@ -91,7 +92,7 @@ pipeline {
 
                                 {
                                     \\"name\\":\\"Live Website\\",
-                                    \\"value\\":\\"http://localhost:8080\\"
+                                    \\"value\\":\\"http://localhost:30080\\"
                                 },
 
                                 {
