@@ -3,6 +3,17 @@
 
 ---
 
+This project demonstrates an automated CI/CD pipeline for a static portfolio website. Whenever the website files are modified and saved, a PowerShell watcher triggers a Jenkins pipeline running inside Docker. The pipeline rebuilds the Docker image, redeploys the website using Nginx, and pushes the latest code to GitHub automatically.
+
+**Contents**
+- Overview
+- Features
+- Architecture
+- Setup
+- Usage
+- Troubleshooting
+- Future Scope
+
 ## How It Works
 
 ```
